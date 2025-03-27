@@ -104,3 +104,43 @@ class DataCleaner:
         """
         self.df = self.df.sort_values(by=column, ascending=ascending)
         self.df = self.df.reset_index(drop=True)
+
+    def count_missing_values(self):
+        return self.df.isnull().sum()
+    
+    def aggregate_data(self, columns, aggregate_method='mean'):
+        """
+        Groups the dataframe by the specified columns and performs the
+        specified aggregation method.
+        :param columns: List of columns to be grouped.
+        :param aggregate_method: Aggregation method to apply.
+        """
+        df_grouped = self.df.groupby(columns)
+
+        if aggregate_method.lower() == 'mean':
+            self.df = df_grouped.mean()
+            self.df = self.df.reset_index(drop=True)
+
+        elif aggregate_method.lower() == 'min':
+            self.df = df_grouped.min()
+            self.df = self.df.reset_index(drop=True)
+
+        elif aggregate_method.lower() == 'max':
+            self.df = df_grouped.max()
+            self.df = self.df.reset_index(drop=True)
+
+        elif aggregate_method.lower() == 'sum':
+            self.df = df_grouped.sum()
+            self.df = self.df.reset_index(drop=True)
+
+        elif aggregate_method.lower() == 'count':
+            self.df = df_grouped.count()
+            self.df = self.df.reset_index(drop=True)
+
+        elif aggregate_method.lower() == 'median':
+            self.df = df_grouped.median()
+            self.df = self.df.reset_index(drop=True)
+
+        else:
+            self.df = df_grouped.mean()
+            self.df = self.df.reset_index(drop=True)
