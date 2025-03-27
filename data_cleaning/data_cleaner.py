@@ -67,7 +67,7 @@ class DataCleaner:
     def preview(self, n=5):
         """
         Previews the first few rows of the cleaned data.
-        :param n: Number of columns to print.
+        :param n: Number of rows to print.
         """
         return self.df.head(n)
 
@@ -93,3 +93,14 @@ class DataCleaner:
         :param items: List of items to be added to column.
         """
         self.df[column] = items
+
+    def sort_column(self, column, ascending=True):
+        """
+        Sorts the dataframe based on the column in ascending or descending
+        order.
+        :param column: Name of the column to sort by.
+        :param ascending: Boolean indicating whether or not to sort by
+        ascending order.
+        """
+        self.df = self.df.sort_values(by=column, ascending=ascending)
+        self.df = self.df.reset_index(drop=True)
