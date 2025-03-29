@@ -119,28 +119,36 @@ class DataCleaner:
 
         if aggregate_method.lower() == 'mean':
             self.df = df_grouped.mean()
-            self.df = self.df.reset_index(drop=True)
+            self.df = self.df.reset_index(drop=False)
 
         elif aggregate_method.lower() == 'min':
             self.df = df_grouped.min()
-            self.df = self.df.reset_index(drop=True)
+            self.df = self.df.reset_index(drop=False)
 
         elif aggregate_method.lower() == 'max':
             self.df = df_grouped.max()
-            self.df = self.df.reset_index(drop=True)
+            self.df = self.df.reset_index(drop=False)
 
         elif aggregate_method.lower() == 'sum':
             self.df = df_grouped.sum()
-            self.df = self.df.reset_index(drop=True)
+            self.df = self.df.reset_index(drop=False)
 
         elif aggregate_method.lower() == 'count':
             self.df = df_grouped.count()
-            self.df = self.df.reset_index(drop=True)
+            self.df = self.df.reset_index(drop=False)
 
         elif aggregate_method.lower() == 'median':
             self.df = df_grouped.median()
-            self.df = self.df.reset_index(drop=True)
+            self.df = self.df.reset_index(drop=False)
 
         else:
             self.df = df_grouped.mean()
-            self.df = self.df.reset_index(drop=True)
+            self.df = self.df.reset_index(drop=False)
+
+    def filter_by_column(self, column, value):
+        """
+        Filters the data frame by a specific column and value.
+        :param column: The column to be filtered.
+        :param value: The value to be filtered by.
+        """
+        self.df = self.df[self.df[column] == value]
