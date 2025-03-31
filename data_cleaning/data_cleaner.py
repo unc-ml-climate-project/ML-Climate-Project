@@ -12,15 +12,16 @@ class DataCleaner:
         self.file_path = file_path
         self.df = pd.read_csv(self.file_path)
 
-    def remove_text(self, column, text):
+    def remove_text(self, column, text, regex=False):
         """
         Removes unwanted text from a specified column.
         :param column: The column name to clean.
         :param text: The text to remove from the column.
+        :param regex: Check if text is a regex pattern (bool)
         """
         if self.df[column].dtypes != "object":
             raise Exception("Cannot remove text on a non-string column")
-        self.df[column] = self.df[column].str.replace(text, "", regex=False)
+        self.df[column] = self.df[column].str.replace(text, "", regex=regex)
 
     def strip_spaces(self, column):
         """
