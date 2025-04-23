@@ -108,7 +108,7 @@ class DataCleaner:
 
     def count_missing_values(self):
         return self.df.isnull().sum()
-    
+
     def aggregate_data(self, columns, aggregate_method='mean'):
         """
         Groups the dataframe by the specified columns and performs the
